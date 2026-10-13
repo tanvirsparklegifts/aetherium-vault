@@ -1,7 +1,5 @@
 <img width="1024" height="1536" alt="1000017048" src="https://github.com/user-attachments/assets/63ac787e-d884-4c8b-ae52-89e01e8f0fd2" />
 
-![Aetherium Vault Architecture](https://github.com/user-attachments/assets/1000017048.png)
-
 <h1 align="center">Aetherium Vault</h1>
 
 <p align="center">
