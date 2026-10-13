@@ -42,3 +42,15 @@ No telemetry, no tracking, and zero logs. The encryption key is derived directly
 ---
 
 *© 2026 Aetherium Vault. Created with precision by Tonmoy.*
+
+
+---
+
+## 📥 How to Install Extension (Desktop & Mobile)
+
+1. Click the **Download Overlay Extension (ZIP)** button on our website or download this repository as ZIP.
+2. Extract/Unzip the downloaded file on your device.
+3. Open **Google Chrome** or **Brave Browser** and go to `chrome://extensions`.
+4. Turn on **Developer Mode** (top right toggle).
+5. Click **Load Unpacked** and select the unzipped folder.
+6. Done! **Aetherium Vault** is now active on your browser.
