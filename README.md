@@ -1,7 +1,7 @@
-
 <p align="center">
   <img src="./assets/1000017048.png" alt="Aetherium Vault Architecture" width="100%">
 </p>
+
 
 <h1 align="center">Aetherium Vault</h1>
 
