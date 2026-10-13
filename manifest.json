@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "Aetherium Vault",
+  "version": "1.0.0",
+  "description": "Privacy-First AI Command Overlay & Asset Manager | Architected by Tonmoy",
+  "action": {
+    "default_popup": "index.html"
+  },
+  "permissions": ["storage", "activeTab"]
+}
