@@ -1,56 +1,44 @@
 
-# 🛡️ Aetherium Vault
+<p align="center">
+  <img src="./assets/1000017048.png" alt="Aetherium Vault Architecture" width="100%">
+</p>
 
-> **Privacy-First AI Command Overlay & Smart Asset Manager**  
-> *Architected & Designed by **Tonmoy** | Powered by **Tanvir Sparkle***
+<h1 align="center">Aetherium Vault</h1>
 
----
+<p align="center">
+  <b>Zero-Knowledge AI Command Overlay & Cryptographic UI Dashboard</b>
+</p>
 
-## 🌌 Overview
-**Aetherium Vault** is a next-generation, cross-device utility that seamlessly tracks crypto assets, projects, and AI insights directly from your browser with Zero-Knowledge End-to-End Encryption.
-
-Designed for frequent traders, developers, and privacy enthusiasts who demand full ownership of their data without compromising speed or visual elegance.
-
----
-
-## ✨ Key Features
-- **Zero-Knowledge Architecture:** Data is encrypted locally using AES-GCM 256-bit encryption before leaving your browser.
-- **AI Command Overlay:** A floating, lightweight overlay widget for real-time asset tracking and AI insights.
-- **Cyber-Futuristic UI:** Dark-neon aesthetic designed for optimal clarity and focus.
-- **Cross-Platform Readiness:** Optimized for Chrome, Brave, and Edge browser extension integration.
+<p align="center">
+  <a href="https://tanvirsparklegifts.github.io/aetherium-vault/">
+    <img src="https://img.shields.io/badge/🌐_View_Live-Demo-cyan?style=for-the-badge" alt="Live Demo">
+  </a>
+  <img src="https://img.shields.io/badge/Status-Active-success?style=for-the-badge" alt="Status">
+  <img src="https://img.shields.io/badge/License-MIT-purple?style=for-the-badge" alt="License">
+</p>
 
 ---
 
-## 🛠️ Technology Stack
-- **Frontend:** Next.js (React), Tailwind CSS
-- **Encryption:** Web Crypto API (PBKDF2 & AES-GCM 256-bit)
-- **Overlay Engine:** Browser Extension Manifest V3
-- **Deployment:** Vercel / GitHub Pages
+## 🚀 About The Project
+**Aetherium Vault** is an advanced cryptographic UI dashboard and zero-knowledge AI command overlay designed for secure data operations, modern web encryption, and decentralized privacy workflows.
 
 ---
 
-## 🔐 Security & Privacy
-No telemetry, no tracking, and zero logs. The encryption key is derived directly from your master passphrase and is never stored on any server.
+## 🛠️ Core Architecture & Features
+
+* **AES-256 Bit Encryption:** Military-grade encryption ensuring maximum security for plaintext data flows and ciphertexts.
+* **Web Crypto API:** Native browser-based cryptographic implementation utilizing PBKDF2 and AES-GCM 256-bit encryption.
+* **Zero-Knowledge Proof Diagrams:** Interactive ZK proof flows focusing on privacy, trust, and zero data exposure.
+* **Cyberpunk UI Interface:** High-resolution neon aesthetic dashboard optimized for developer portfolios and Web3 readiness.
 
 ---
 
-## 👤 Architect & Founder
-- **Lead Architect:** Tonmoy
-- **Organization / Brand:** Tanvir Sparkle
-- **Status:** Open for Global Tech Partnerships & Innovation Showcase
+## 🌐 Live Access
+Explore the live deployment here:  
+👉 **[tanvirsparklegifts.github.io/aetherium-vault/](https://tanvirsparklegifts.github.io/aetherium-vault/)**
 
 ---
 
-*© 2026 Aetherium Vault. Created with precision by Tonmoy.*
-
-
----
-
-## 📥 How to Install Extension (Desktop & Mobile)
-
-1. Click the **Download Overlay Extension (ZIP)** button on our website or download this repository as ZIP.
-2. Extract/Unzip the downloaded file on your device.
-3. Open **Google Chrome** or **Brave Browser** and go to `chrome://extensions`.
-4. Turn on **Developer Mode** (top right toggle).
-5. Click **Load Unpacked** and select the unzipped folder.
-6. Done! **Aetherium Vault** is now active on your browser.
+<p align="center">
+  <i>Architected & Designed by <b>Tonmoy</b></i>
+</p>
