@@ -1,13 +1,15 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aetherium Vault | AZK-HG Simulation System</title>
+    <title>Aetherium Vault | AZK-HG Simulation & Crypto Engine</title>
     <style>
         :root {
             --bg-color: #030712;
-            --card-bg: rgba(15, 23, 42, 0.8);
+            --card-bg: rgba(15, 23, 42, 0.85);
             --border-color: #1e293b;
             --accent-cyan: #06b6d4;
             --accent-green: #10b981;
@@ -76,6 +78,7 @@
             border: 1px solid var(--border-color);
             padding: 16px;
             border-radius: 8px;
+            margin-bottom: 16px;
         }
 
         .panel h3 {
@@ -90,6 +93,22 @@
             font-weight: bold;
             color: var(--text-main);
             margin: 8px 0;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        input {
+            background: #090d16;
+            border: 1px solid var(--border-color);
+            color: var(--accent-cyan);
+            padding: 10px;
+            border-radius: 6px;
+            font-family: inherit;
         }
 
         .btn {
@@ -120,6 +139,7 @@
             overflow-y: auto;
             font-size: 0.85rem;
             color: var(--accent-green);
+            word-break: break-all;
         }
 
         .log-entry {
@@ -162,16 +182,29 @@
         </div>
     </div>
 
+    <!-- Live Web Crypto API Execution Module -->
+    <div class="panel">
+        <h3>Live AES-256-GCM Hardware Vault Engine</h3>
+        <div class="input-group">
+            <input type="text" id="secret-input" placeholder="Enter sensitive data/telemetry stream..." value="Tesla Autonomous Flight Data #8821">
+            <input type="password" id="passkey-input" placeholder="Hardware Passphrase" value="AetheriumMasterKey2026">
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <button class="btn" onclick="executeEncrypt()">ENCRYPT (AES-256-GCM)</button>
+            <button class="btn" style="background: var(--accent-green); color: #000;" onclick="executeDecrypt()">DECRYPT DATA</button>
+        </div>
+    </div>
+
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
-        <button class="btn" onclick="runZKProof()">EXECUTE ZK CIRCUIT PROOF</button>
+        <button class="btn" style="background: rgba(6, 182, 212, 0.2); color: var(--accent-cyan); border: 1px solid var(--accent-cyan);" onclick="runZKProof()">EXECUTE ZK CIRCUIT PROOF</button>
         <button class="btn" style="background: var(--accent-red); color: #fff;" onclick="simulateBitFlip()">TRIGGER COSMIC BIT-FLIP</button>
     </div>
 
     <div class="panel">
-        <h3>Hardware Telemetry Log</h3>
+        <h3>Hardware Telemetry & Cryptographic Log</h3>
         <div class="console" id="console-log">
             <div class="log-entry">[SYS INIT] AZK-HG Hardware Micro-kernel initialized.</div>
-            <div class="log-entry">[ENCLAVE] AES-256 Key Derivation Pipeline ready.</div>
+            <div class="log-entry">[ENCLAVE] Web Crypto API (crypto.js) loaded.</div>
             <div class="log-entry">[READY] Awaiting ZK Instruction Verification...</div>
         </div>
     </div>
@@ -181,7 +214,13 @@
     </div>
 </div>
 
+<!-- Load Core Cryptographic Engine -->
+<script src="crypto.js"></script>
+
 <script>
+    const cryptoEngine = new AetheriumCryptoEngine();
+    let currentEncryptedPayload = null;
+
     function logMessage(msg, isError = false) {
         const consoleEl = document.getElementById('console-log');
         const entry = document.createElement('div');
@@ -190,6 +229,48 @@
         entry.innerText = `[${timestamp}] ${msg}`;
         consoleEl.appendChild(entry);
         consoleEl.scrollTop = consoleEl.scrollHeight;
+    }
+
+    async function executeEncrypt() {
+        try {
+            const secret = document.getElementById('secret-input').value;
+            const passkey = document.getElementById('passkey-input').value;
+
+            if (!secret || !passkey) {
+                logMessage('Error: Input string and passkey are required.', true);
+                return;
+            }
+
+            logMessage(`[PBKDF2] Deriving 256-bit key from passphrase...`);
+            const key = await cryptoEngine.deriveKey(passkey, 'AetheriumSalt2026');
+            
+            logMessage(`[AES-GCM] Encrypting data stream using Web Crypto API...`);
+            currentEncryptedPayload = await cryptoEngine.encryptData(secret, key);
+            
+            const cipherHex = Array.from(currentEncryptedPayload.ciphertext).map(b => b.toString(16).padStart(2, '0')).join('');
+            logMessage(`[SUCCESS] Ciphertext (Hex): ${cipherHex.substring(0, 32)}...`);
+        } catch (err) {
+            logMessage(`[CRYPT_ERR] Encryption failed: ${err.message}`, true);
+        }
+    }
+
+    async function executeDecrypt() {
+        try {
+            if (!currentEncryptedPayload) {
+                logMessage('Error: No encrypted payload found. Encrypt first!', true);
+                return;
+            }
+
+            const passkey = document.getElementById('passkey-input').value;
+            logMessage(`[PBKDF2] Deriving key for decryption...`);
+            const key = await cryptoEngine.deriveKey(passkey, 'AetheriumSalt2026');
+
+            logMessage(`[AES-GCM] Decrypting payload...`);
+            const decryptedText = await cryptoEngine.decryptData(currentEncryptedPayload, key);
+            logMessage(`[DECRYPTED SUCCESS] Result: "${decryptedText}"`);
+        } catch (err) {
+            logMessage(`[CRYPT_ERR] Decryption failed! Invalid key or corrupted payload.`, true);
+        }
     }
 
     function runZKProof() {
@@ -217,4 +298,3 @@
 
 </body>
 </html>
-
