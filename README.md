@@ -26,7 +26,7 @@
 * **AES-256 Bit Encryption:** Military-grade encryption ensuring maximum security for plaintext data flows and ciphertexts.
 * **Web Crypto API:** Native browser-based cryptographic implementation utilizing PBKDF2 and AES-GCM 256-bit encryption.
 * **Zero-Knowledge Proof Diagrams:** Interactive ZK proof flows focusing on privacy, trust, and zero data exposure.
-* **Cyberpunk UI Interface:** High-resolution neon aesthetic dashboard optimized for developer portfolios and Web3 readiness.
+* **Cyberpunk UI Interface:** High-resolution neon  dashboard optimized for developer portfolios and Web3 readiness.
 
 ---
 
@@ -35,8 +35,6 @@ Explore the live deployment here:
 👉 **[tanvirsparklegifts.github.io/aetherium-vault/](https://tanvirsparklegifts.github.io/aetherium-vault/)**
 
 ---
-
-
 
 <p align="center">
   <i>Architected & Designed by <b>Tonmoy</b></i>
