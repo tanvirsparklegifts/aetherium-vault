@@ -22,7 +22,7 @@ jobs:
           python-version: "3.x"
       - name: Install Playwright
         run: |
-          npm install --no-save @playwright/test
+          npm install
           npx playwright install --with-deps chromium
       - name: Run browser integration tests
         run: npx playwright test
