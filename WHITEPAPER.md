@@ -1,43 +1,44 @@
-# Aetherium Zero-Knowledge Hardware Guard (AZK-HG)
-## Technical Whitepaper: Zero-Latency Cryptographic Micro-Kernel Architecture
+# Aetherium Vault — Technical Concept Note
 
+**Theme:** Browser cryptography and a proposed privacy-preserving security overlay  
 **Author:** Md Tanvir Ahammed Tonmoy  
-**Project:** Aetherium Vault  
-**License:** MIT License  
 **Date:** 2026  
+**Status:** Concept note; proposed capabilities are not implemented unless explicitly listed below
 
----
+## 1. Summary
 
-## Executive Summary
-As autonomous edge systems (aerospace, self-driving automotive, Neuralink micro-controllers) become mission-critical, hardware memory integrity and ultra-low latency data protection remain fundamental challenges. Existing software-level encryption mechanisms introduce high processing overheads, making real-time zero-knowledge verification impractical for microsecond decision pipelines.
+Aetherium Vault is an educational browser-side cryptography prototype. Its current code demonstrates passphrase-based key derivation with PBKDF2-SHA256 and authenticated encryption with AES-256-GCM using the Web Crypto API.
 
-The **Aetherium Zero-Knowledge Hardware Guard (AZK-HG)** resolves this tradeoff by embedding a zero-latency cryptographic verification layer at the micro-kernel level. By utilizing Zero-Knowledge Proofs (ZKP), local AES-256-GCM primitives, and a self-healing mathematical state-checker, AZK-HG protects silicon instruction execution against external tampering, cosmic bit-flips, and unauthorized memory exploits.
+The broader AZK-HG idea explores whether cryptographic verification, privacy-preserving proofs, and hardware integrity mechanisms could be combined into a future security architecture. This document separates the implemented browser demo from that research proposal.
 
----
+## 2. Implemented baseline
 
-## Key Breakthroughs & Architectural Innovations
+- Derives a 256-bit AES-GCM key from a passphrase using PBKDF2-SHA256.
+- Generates a fresh 16-byte random salt and 12-byte random IV for each encryption operation.
+- Holds the encrypted payload in page memory for the current session.
+- Uses AES-GCM authenticated decryption to reject invalid or tampered ciphertext.
 
-### 1. Microsecond ZK-Circuit Verification
-* **Problem:** Traditional ZK verification introduces computational latency unsuitable for automotive or flight microchips.
-* **Solution:** AZK-HG pre-computes circuit validity proofs and executes validation using lightweight WebAssembly (Wasm) and hardware enclave primitives, guaranteeing microsecond-level execution safety.
+## 3. Proposed research (not implemented)
 
-### 2. Cosmic-Ray Fault Tolerance & Bit-Flip Immunity
-* **Problem:** Deep-space radiation and high-voltage environments cause unexpected bit-flips (single-event upsets), leading to system kernel panics or security exploits.
-* **Solution:** Continuous mathematical checksums monitor memory state transitions to automatically restore bit states without requiring hardware restarts.
+- A zero-knowledge proof system with specified circuits, assumptions, test vectors, and independent verification.
+- Hardware enclave or secure-element integration.
+- Detection and recovery from memory faults or single-event upsets.
+- Reproducible latency benchmarks with defined hardware, workloads, and statistical methodology.
+- Secure persistent storage, backup, recovery, and key rotation.
 
-### 3. Privacy-Preserving Edge AI Overlay
-* **Problem:** Cloud-reliant AI models risk exposing sensitive personal and telemetry data.
-* **Solution:** Local LLM/Agent commands execute over homomorphic state representations, performing tasks without exposing unencrypted raw memory to the AI layer.
+No zero-latency, sub-microsecond, cosmic-ray immunity, hardware self-healing, or production-grade ZK verification claim is made by the current repository.
 
----
+## 4. Threat model and limitations
 
-## Enterprise & Commercial Applications
+The current demo does not protect against a compromised browser, malicious extensions, endpoint malware, weak passphrases, memory inspection, phishing, or an insecure deployment environment. The payload is not persisted. The project is not an audited password manager, custody system, or production security boundary.
 
-* **Aerospace & Spacecraft (NASA / SpaceX):** Fault-tolerant micro-kernel security for satellite memory buffers and autonomous flight controls.
-* **Autonomous Vehicles & Chips (Tesla / Neuralink):** Sub-millisecond cryptographic hardware shields for edge compute chips and sensor fusion loops.
-* **Privacy-First Consumer OS (Apple / Google / Microsoft):** On-device cryptographic vault integration for local AI agent workflows.
+## 5. Validation roadmap
 
----
+1. Add automated browser tests for encryption/decryption and tamper rejection.
+2. Review passphrase handling, salt/IV lifecycle, and error handling.
+3. Define a threat model and conduct independent cryptographic review.
+4. Only then evaluate persistent storage or external integrations.
 
-## Conclusion
-The AZK-HG architecture introduces a new paradigm in embedded cryptographic security. By bridging zero-knowledge proofs with low-level kernel execution, Aetherium Vault establishes a scalable, mathematical, and tamper-resistant foundation for next-generation hardware systems.
+## 6. Intended use
+
+Use this project for education and prototype evaluation only. Do not enter real secrets or regulated data. See [SECURITY.md](SECURITY.md).
