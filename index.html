@@ -173,7 +173,7 @@
         <div class="panel">
             <h3>ZK Verification Latency</h3>
             <div class="metric" id="latency-val">0.042 ms</div>
-            <small style="color: var(--accent-green);">Sub-Microsecond Validated</small>
+            <small style="color: var(--accent-green);">Illustrative UI metric — not benchmarked</small>
         </div>
         <div class="panel">
             <h3>Memory State Integrity</h3>
@@ -184,7 +184,7 @@
 
     <!-- Live Web Crypto API Execution Module -->
     <div class="panel">
-        <h3>Live AES-256-GCM Hardware Vault Engine</h3>
+        <h3>Browser AES-256-GCM Cryptography Demo</h3>
         <div class="input-group">
             <input type="text" id="secret-input" placeholder="Enter sensitive data/telemetry stream..." value="Tesla Autonomous Flight Data #8821">
             <input type="password" id="passkey-input" placeholder="Hardware Passphrase" value="AetheriumMasterKey2026">
@@ -196,16 +196,16 @@
     </div>
 
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
-        <button class="btn" style="background: rgba(6, 182, 212, 0.2); color: var(--accent-cyan); border: 1px solid var(--accent-cyan);" onclick="runZKProof()">EXECUTE ZK CIRCUIT PROOF</button>
+        <button class="btn" style="background: rgba(6, 182, 212, 0.2); color: var(--accent-cyan); border: 1px solid var(--accent-cyan);" onclick="runZKProof()">RUN ZK UI SIMULATION</button>
         <button class="btn" style="background: var(--accent-red); color: #fff;" onclick="simulateBitFlip()">TRIGGER COSMIC BIT-FLIP</button>
     </div>
 
     <div class="panel">
-        <h3>Hardware Telemetry & Cryptographic Log</h3>
+        <h3>Simulation & Cryptographic Log</h3>
         <div class="console" id="console-log">
-            <div class="log-entry">[SYS INIT] AZK-HG Hardware Micro-kernel initialized.</div>
+            <div class="log-entry">[SYS INIT] Aetherium Vault UI initialized.</div>
             <div class="log-entry">[ENCLAVE] Web Crypto API (crypto.js) loaded.</div>
-            <div class="log-entry">[READY] Awaiting ZK Instruction Verification...</div>
+            <div class="log-entry">[READY] Awaiting ZK interface simulation...</div>
         </div>
     </div>
 
@@ -237,20 +237,22 @@
             const passkey = document.getElementById('passkey-input').value;
 
             if (!secret || !passkey) {
-                logMessage('Error: Input string and passkey are required.', true);
+                logMessage('Error: Input string and passphrase are required.', true);
                 return;
             }
 
-            logMessage(`[PBKDF2] Deriving 256-bit key from passphrase...`);
-            const key = await cryptoEngine.deriveKey(passkey, 'AetheriumSalt2026');
-            
-            logMessage(`[AES-GCM] Encrypting data stream using Web Crypto API...`);
-            currentEncryptedPayload = await cryptoEngine.encryptData(secret, key);
-            
+            const salt = cryptoEngine.generateSalt();
+            logMessage('[PBKDF2] Deriving a 256-bit key with a fresh random salt...');
+            const key = await cryptoEngine.deriveKey(passkey, salt);
+
+            logMessage('[AES-GCM] Encrypting with a fresh random 96-bit IV...');
+            currentEncryptedPayload = await cryptoEngine.encryptData(secret, key, salt);
+
             const cipherHex = Array.from(currentEncryptedPayload.ciphertext).map(b => b.toString(16).padStart(2, '0')).join('');
-            logMessage(`[SUCCESS] Ciphertext (Hex): ${cipherHex.substring(0, 32)}...`);
+            logMessage('[SUCCESS] Ciphertext (Hex): ' + cipherHex.substring(0, 32) + '...');
+            logMessage('[INFO] Salt and IV are stored with this in-memory payload for decryption.');
         } catch (err) {
-            logMessage(`[CRYPT_ERR] Encryption failed: ${err.message}`, true);
+            logMessage('[CRYPT_ERR] Encryption failed: ' + err.message, true);
         }
     }
 
@@ -262,21 +264,21 @@
             }
 
             const passkey = document.getElementById('passkey-input').value;
-            logMessage(`[PBKDF2] Deriving key for decryption...`);
-            const key = await cryptoEngine.deriveKey(passkey, 'AetheriumSalt2026');
+            logMessage('[PBKDF2] Deriving key from the payload salt...');
+            const key = await cryptoEngine.deriveKey(passkey, currentEncryptedPayload.salt);
 
-            logMessage(`[AES-GCM] Decrypting payload...`);
+            logMessage('[AES-GCM] Decrypting payload...');
             const decryptedText = await cryptoEngine.decryptData(currentEncryptedPayload, key);
-            logMessage(`[DECRYPTED SUCCESS] Result: "${decryptedText}"`);
+            logMessage('[DECRYPTED SUCCESS] Result: "' + decryptedText + '"');
         } catch (err) {
-            logMessage(`[CRYPT_ERR] Decryption failed! Invalid key or corrupted payload.`, true);
+            logMessage('[CRYPT_ERR] Decryption failed! Invalid key or corrupted payload.', true);
         }
     }
 
     function runZKProof() {
         const latency = (Math.random() * 0.03 + 0.015).toFixed(3);
         document.getElementById('latency-val').innerText = `${latency} ms`;
-        logMessage(`[ZK-PROOF] Generated SNARK proof in ${latency}ms. Validated by Micro-Kernel.`);
+        logMessage(`[ZK-PROOF] UI-only simulation displayed ${latency}ms. No SNARK proof is generated or verified.`);
     }
 
     function simulateBitFlip() {
