@@ -33,8 +33,8 @@ test("rejects a wrong passphrase during authenticated decryption", async () => {
 test("rejects invalid salt and malformed encrypted payload", async () => {
   const engine = new AetheriumCryptoEngine();
 
-  assert.throws(() => engine.deriveKey("passphrase", new Uint8Array(8)), /16-byte/);
-  assert.throws(() => engine.encryptData("text", {}, new Uint8Array(8)), /16-byte/);
+  await assert.rejects(() => engine.deriveKey("passphrase", new Uint8Array(8)), /16-byte/);
+  await assert.rejects(() => engine.encryptData("text", {}, new Uint8Array(8)), /16-byte/);
   await assert.rejects(() => engine.decryptData({ version: 1 }, {}), /Invalid encrypted payload/);
 });
 
