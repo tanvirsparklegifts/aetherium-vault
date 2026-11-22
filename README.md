@@ -1,42 +1,37 @@
-<img width="1024" height="1536" alt="1000017048" src="https://github.com/user-attachments/assets/63ac787e-d884-4c8b-ae52-89e01e8f0fd2" />
+# Aetherium Vault
 
-<h1 align="center">Aetherium Vault</h1>
+**Browser Cryptography Demo — PBKDF2 + AES-256-GCM**
 
-<p align="center">
-  <b>Zero-Knowledge AI Command Overlay & Cryptographic UI Dashboard</b>
-</p>
+Aetherium Vault is an educational browser-side cryptography prototype with a cyberpunk dashboard. It demonstrates passphrase-based key derivation and authenticated encryption using the browser Web Crypto API.
 
-<p align="center">
-  <a href="https://tanvirsparklegifts.github.io/aetherium-vault/">
-    <img src="https://img.shields.io/badge/🌐_View_Live-Demo-cyan?style=for-the-badge" alt="Live Demo">
-  </a>
-  <img src="https://img.shields.io/badge/Status-Active-success?style=for-the-badge" alt="Status">
-  <img src="https://img.shields.io/badge/License-MIT-purple?style=for-the-badge" alt="License">
-</p>
+[Open the live demo](https://tanvirsparklegifts.github.io/aetherium-vault/)
 
----
+## Current implementation
 
-## 🚀 About The Project
-**Aetherium Vault** is an advanced cryptographic UI dashboard and zero-knowledge AI command overlay designed for secure data operations, modern web encryption, and decentralized privacy workflows.
+- PBKDF2 with SHA-256 derives a 256-bit AES-GCM key from a passphrase.
+- Each encryption operation generates a fresh 16-byte random salt.
+- Each encryption operation generates a fresh 12-byte random AES-GCM IV.
+- The encrypted payload is held in page memory and includes the salt, IV, and ciphertext for the current session's decrypt action.
+- The UI includes illustrative panels for ZK, hardware-guard, integrity, and latency concepts. These panels are simulations only.
 
----
+## Run locally
 
-## 🛠️ Core Architecture & Features
+Serve the repository over HTTPS or localhost so the Web Crypto API is available. For example, with Python:
 
-* **AES-256 Bit Encryption:** Military-grade encryption ensuring maximum security for plaintext data flows and ciphertexts.
-* **Web Crypto API:** Native browser-based cryptographic implementation utilizing PBKDF2 and AES-GCM 256-bit encryption.
-* **Zero-Knowledge Proof Diagrams:** Interactive ZK proof flows focusing on privacy, trust, and zero data exposure.
-* **Cyberpunk UI Interface:** High-resolution neon  dashboard optimized for developer portfolios and Web3 readiness.
+    python -m http.server 8000
 
----
+Then open http://localhost:8000.
 
-## 🌐 Live Access
-Explore the live deployment here:  
-👉 **[tanvirsparklegifts.github.io/aetherium-vault/](https://tanvirsparklegifts.github.io/aetherium-vault/)**
+## Security scope
 
----
+This is not an audited password manager, hardware enclave, zero-knowledge proof implementation, custody product, or production security boundary. Do not enter real secrets, reused passwords, or regulated data. The project has not undergone an independent security audit.
 
-<p align="center">
-  <i>Architected & Designed by <b>Tonmoy</b></i>
-</p>
+Read [SECURITY.md](SECURITY.md) for the implementation details, limitations, and responsible disclosure guidance.
 
+## Development
+
+The core browser cryptography implementation is in crypto.js. The demo page is index.html. Changes to cryptographic behavior should be reviewed carefully and accompanied by reproducible test evidence.
+
+## License
+
+See [LICENSE](LICENSE).
