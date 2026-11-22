@@ -172,13 +172,13 @@
     <div class="grid">
         <div class="panel">
             <h3>ZK Verification Latency</h3>
-            <div class="metric" id="latency-val">0.042 ms</div>
+            <div class="metric" id="latency-val">—</div>
             <small style="color: var(--accent-green);">Illustrative UI metric — not benchmarked</small>
         </div>
         <div class="panel">
             <h3>Memory State Integrity</h3>
-            <div class="metric" id="integrity-val">100.00%</div>
-            <small style="color: var(--accent-cyan);">Fault Immunity Active</small>
+            <div class="metric" id="integrity-val">SIMULATED</div>
+            <small style="color: var(--accent-cyan);">Demo status indicator</small>
         </div>
     </div>
 
@@ -187,7 +187,7 @@
         <h3>Browser AES-256-GCM Cryptography Demo</h3>
         <div class="input-group">
             <input type="text" id="secret-input" placeholder="Enter sensitive data/telemetry stream..." value="Tesla Autonomous Flight Data #8821">
-            <input type="password" id="passkey-input" placeholder="Hardware Passphrase" value="AetheriumMasterKey2026">
+            <input type="password" id="passkey-input" placeholder="Hardware Passphrase" >
         </div>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
             <button class="btn" onclick="executeEncrypt()">ENCRYPT (AES-256-GCM)</button>
