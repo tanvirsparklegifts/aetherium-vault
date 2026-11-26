@@ -2,7 +2,7 @@
 
 **Browser Cryptography Prototype — PBKDF2 + AES-256-GCM**
 
-[![Browser tests](https://github.com/tanvirsparklegifts/aetherium-vault/actions/workflows/ci.yml/badge.svg)](https://github.com/tanvirsparklegifts/aetherium-vault/actions/workflows/ci.yml)
+[![Browser tests](https://github.com/tanvirsparklegifts/aetherium-vault/actions/workflows/browser-tests.yml/badge.svg)](https://github.com/tanvirsparklegifts/aetherium-vault/actions/workflows/ci.yml)
 
 Aetherium Vault is an educational browser-side cryptography prototype with a cyberpunk dashboard. It demonstrates passphrase-based key derivation and authenticated encryption using the browser Web Crypto API.
 
