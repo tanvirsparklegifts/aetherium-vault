@@ -1,36 +1,54 @@
 # Aetherium Vault
 
-**Browser Cryptography Demo — PBKDF2 + AES-256-GCM**
+**Browser Cryptography Prototype — PBKDF2 + AES-256-GCM**
+
+[![Browser tests](https://github.com/tanvirsparklegifts/aetherium-vault/actions/workflows/ci.yml/badge.svg)](https://github.com/tanvirsparklegifts/aetherium-vault/actions/workflows/ci.yml)
 
 Aetherium Vault is an educational browser-side cryptography prototype with a cyberpunk dashboard. It demonstrates passphrase-based key derivation and authenticated encryption using the browser Web Crypto API.
 
 [Open the live demo](https://tanvirsparklegifts.github.io/aetherium-vault/)
 
-## Current implementation
+## Implemented cryptography
 
-- PBKDF2 with SHA-256 derives a 256-bit AES-GCM key from a passphrase.
-- Each encryption operation generates a fresh 16-byte random salt.
-- Each encryption operation generates a fresh 12-byte random AES-GCM IV.
-- The encrypted payload is held in page memory and includes the salt, IV, and ciphertext for the current session's decrypt action.
-- The UI includes illustrative panels for ZK, hardware-guard, integrity, and latency concepts. These panels are simulations only.
+- PBKDF2 with SHA-256 derives a non-extractable 256-bit AES-GCM key from a passphrase.
+- Each encryption operation uses a fresh 16-byte cryptographically random salt.
+- Each encryption operation uses a fresh 12-byte cryptographically random AES-GCM IV.
+- AES-GCM authenticated decryption rejects an incorrect key or modified ciphertext.
+- The current encrypted payload is held in page memory for the demo session.
 
-## Run locally
+## Browser test suite
 
-Serve the repository over HTTPS or localhost so the Web Crypto API is available. For example, with Python:
+Playwright tests cover:
+- Successful encryption and decryption of a sample message.
+- Rejection of a wrong passphrase.
+- Required-input validation.
+- Accurate demo-status labeling.
 
-    python -m http.server 8000
+Run locally:
 
-Then open http://localhost:8000.
+```bash
+npm install
+npx playwright install chromium
+npm run test:browser
+```
 
-## Security scope
+The test runner starts a local HTTP server on port 4173. The browser Web Crypto API is available on localhost.
 
-This is not an audited password manager, hardware enclave, zero-knowledge proof implementation, custody product, or production security boundary. Do not enter real secrets, reused passwords, or regulated data. The project has not undergone an independent security audit.
+## Security scope and limitations
 
-Read [SECURITY.md](SECURITY.md) for the implementation details, limitations, and responsible disclosure guidance.
+This is not an audited password manager, hardware enclave, zero-knowledge proof implementation, custody product, or production security boundary.
+
+- The encrypted payload is held in page memory only; there is no durable encrypted storage or key recovery.
+- The passphrase is entered into a browser page. Do not use a production, reused, or personally important password.
+- ZK proof, hardware guard, bit-flip, integrity, and latency panels are UI simulations only. They do not execute a real ZK circuit, access hardware enclaves, detect physical faults, or establish performance guarantees.
+- The project has not undergone an independent security audit or penetration test.
+- Use a modern browser in a secure context (HTTPS or localhost).
+
+See [SECURITY.md](SECURITY.md) for implementation details, limitations, and responsible disclosure guidance.
 
 ## Development
 
-The core browser cryptography implementation is in crypto.js. The demo page is index.html. Changes to cryptographic behavior should be reviewed carefully and accompanied by reproducible test evidence.
+The core browser cryptography implementation is in `crypto.js`; the demo page is `index.html`. Changes to cryptographic behavior should include reproducible tests.
 
 ## License
 
